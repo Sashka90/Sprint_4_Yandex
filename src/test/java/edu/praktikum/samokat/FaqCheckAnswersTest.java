@@ -1,37 +1,20 @@
 package edu.praktikum.samokat;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+import edu.praktikum.samokat.helpers.BrowserRule;
+import org.junit.Rule;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class FaqCheckAnswersTest {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    @Before
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 5);
-    }
+    @Rule
+    public BrowserRule browserRule = new BrowserRule();
 
     @Test
     public void faqCheckAnswersTest() {
-        new MainPage(driver, wait)
+        new MainPage(browserRule.getDriver(), browserRule.getWait())
                 .open()
                 .clickToAcceptCookieButton()
                 .moveToBottomOfPage()
                 .checkFaqAnswersIsVisible();
-    }
-
-    @After
-    public void tearDown(){
-        driver.quit();
     }
 }

@@ -1,14 +1,10 @@
 package edu.praktikum.samokat;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+import edu.praktikum.samokat.helpers.BrowserRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 @RunWith(Parameterized.class)
 public class OrderSamokatTest {
@@ -22,9 +18,6 @@ public class OrderSamokatTest {
     private final String rentalDate;
     private final String color;
     private final String comment;
-
-    private WebDriver driver;
-    private WebDriverWait wait;
 
     public OrderSamokatTest(String name, String lastName, String address, String metroStation, String telephone, String date, String rentalDate, String color, String comment) {
         this.name = name;
@@ -47,16 +40,12 @@ public class OrderSamokatTest {
         };
     }
 
-    @Before
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 5);
-    }
+    @Rule
+    public BrowserRule browserRule = new BrowserRule();
 
     @Test
     public void orderSamokatTest() {
-        new MainPage(driver, wait)
+        new MainPage(browserRule.getDriver(), browserRule.getWait())
                 .open()
                 .clickToAcceptCookieButton()
                 .clickHeaderOrderButton()
@@ -66,10 +55,5 @@ public class OrderSamokatTest {
                 .clickOrderButton()
                 .clickYesButton()
                 .checkSubmitOrder();
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }

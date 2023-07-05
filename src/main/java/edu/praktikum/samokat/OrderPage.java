@@ -9,12 +9,10 @@ public class OrderPage {
 
     private WebDriver driver;
 
-    private final static String URL = "https://qa-scooter.praktikum-services.ru/";
-
     private By inputName = By.cssSelector("[placeholder = '* Имя']");
     private By inputLastName = By.cssSelector("[placeholder = '* Фамилия']");
     private By inputAddress = By.cssSelector("[placeholder = '* Адрес: куда привезти заказ']");
-    private By dropdownMetroStation = By.xpath(".//input[@placeholder = '* Станция метро']");
+    private By dropdownMetroStation = By.cssSelector("[placeholder = '* Станция метро']");
     private By inputTelephone = By.cssSelector("[placeholder = '* Телефон: на него позвонит курьер']");
     private By inputDate = By.xpath(".//input[@placeholder = '* Когда привезти самокат']");
     private By dropdownRentalPeriod = By.xpath(".//div[@class= 'Dropdown-control']");
